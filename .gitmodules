@@ -1,0 +1,9 @@
+[submodule "vim/pack/bmo/start/vim-gitgutter"]
+	path = vim/pack/bmo/start/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter
+[submodule "vim/pack/bmo/start/nerdtree"]
+	path = vim/pack/bmo/start/nerdtree
+	url = https://github.com/preservim/nerdtree
+[submodule "vim/pack/bmo/start/spelunker.vim"]
+	path = vim/pack/bmo/start/spelunker.vim
+	url = https://github.com/kamykn/spelunker.vim.git

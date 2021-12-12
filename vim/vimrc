@@ -1,0 +1,17 @@
+
+" Spacing
+set tabstop=4
+set softtabstop=0
+set shiftwidth=4
+set expandtab
+
+" Style
+syntax on
+set number
+
+" Templates by extension
+if has("autocmd")
+  augroup templates
+    autocmd BufNewFile *.pl 0r ~/.vim/templates/skeleton.pl
+  augroup END
+endif
