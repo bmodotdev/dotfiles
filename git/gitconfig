@@ -1,0 +1,12 @@
+[commit]
+	gpgsign = true
+[user]
+	signingkey = E20B2677410437E2
+	name = William E Little Jr
+[alias]
+	st = status
+	co = checkout
+	d = diff
+	ds = diff --stat
+	l = log --oneline
+	pushf = push --force-with-lease
