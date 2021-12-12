@@ -1,12 +1,19 @@
 [commit]
-	gpgsign = true
+    gpgsign = true
 [user]
-	signingkey = E20B2677410437E2
-	name = William E Little Jr
+    signingkey = E20B2677410437E2
+    name = William E Little Jr
 [alias]
-	st = status
-	co = checkout
-	d = diff
-	ds = diff --stat
-	l = log --oneline
-	pushf = push --force-with-lease
+    co = checkout
+    d = diff
+    ds = diff --stat
+    f = fetch
+    l = log --oneline
+    p = pull
+    pushf = push --force-with-lease
+    st = status
+    sdiff = !git diff && git submodule foreach 'git diff'
+    spush = push --recurse-submodules=on-demand
+    supdate = submodule update --remote --merge
+[submodule]
+    recurse = true

@@ -1,0 +1,110 @@
+#!/usr/bin/env bash
+
+#############
+# Functions #
+#############
+
+# PROMPT_COMMAND installer
+# usage: set_prompt_command 'history -a'
+function set_prompt_command () {
+	[ x"$1" == x ] && return
+	local new="$1"
+
+	# Simply set if unset
+	if [[ x"$PROMPT_COMMAND" == x ]]; then
+		PROMPT_COMMAND="$new"
+		return
+	fi
+
+	# Else, read the commands into an array
+	IFS=';' read -r -a cmds <<<"$PROMPT_COMMAND"
+
+	# Check if the command already exists
+	local set='false'
+	for cmd in "${cmds[@]}"; do
+		[[ "$cmd" == "$new" ]] && set='true'
+	done
+
+	# Return if the command exists
+	if [[ "$set" == 'true' ]]; then
+		unset cmd cmds
+		return
+	# Else, append the new command
+	else
+		[[ "${PROMPT_COMMAND: -1}" == ';' ]] || new=";${new}"
+		export PROMPT_COMMAND="${PROMPT_COMMAND}${new}"
+	fi
+}
+
+# Alias installer
+# usage: set_alias <key> <value>
+function set_alias () {
+	[ x"$1" == x ] && return
+	[ x"$2" == x ] && return
+
+	# We can ignore files
+	local type="$(type -t "$1")"
+	if [ -n "$type" ] && [ "$type" != 'file' ] ; then
+		>&2 printf 'String “%s” alredy exists as a %s\n' "$1" "$type"
+	else
+		alias "$1"="$2"
+	fi
+}
+
+# Archive extractor
+# usage: ex <file>
+function ex () {
+	if [ -f $1 ]; then
+		case $1 in
+		  *.tar.bz2)	tar xjf		"$1";;
+		  *.tar.gz)		tar xzf		"$1";;
+		  *.bz2)		bunzip2		"$1";;
+		  *.rar)		unrar x		"$1";;
+		  *.gz)			gunzip		"$1";;
+		  *.tar)		tar xf		"$1";;
+		  *.tbz2)		tar xjf		"$1";;
+		  *.tgz)		tar xzf 	"$1";;
+		  *.xz)			unxz 		"$1";;
+		  *.zip)		unzip		"$1";;
+		  *.Z)			uncompress	"$1";;
+		  *.7z)			7z x		"$1";;
+		  *)			printf 'cannot be extracted via ex(): “%s”\n' "$1" ;;
+		esac
+	else
+		printf 'not a valid file: “%s”\n' "$1"
+	fi
+}
+
+#############
+# Variables #
+#############
+_GIT_DIR="${HOME}/git/"
+_DOTFILES_DIR="${_GIT_DIR}dotfiles/"
+_BASH_DIR="${_DOTFILES_DIR}bash/"
+export GIT_DIR DOTFILES_DIR BASH_DIR
+export PATH="${PATH}:${HOME}/.local/bin"
+
+# Bash History - http://mywiki.wooledge.org/BashFAQ/088
+HISTCONTROL='ignorespace:ignoredupe'
+HISTFILESIZE=400000000
+HISTIGNORE='cd:clear:fg:fg[ \t]*:history:history[ \t]*:ll:ls'
+HISTSIZE=2000
+export HISTCONTROL HISTFILESIZE HISTSIZE PROMPT_COMMAND
+chattr +a ~/.bash_history
+set_prompt_command 'history -a'
+
+export VISUAL='vim'
+export EDITOR="$VISUAL"
+
+###########
+# Aliases #
+###########
+set_alias 'sudo' 'sudo '
+set_alias 'll' 'ls -lah --color'
+
+#########
+# Setup #
+#########
+for rc in "${_BASH_DIR}"*.bash; do
+	source "$rc"
+done
