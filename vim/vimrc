@@ -15,3 +15,10 @@ if has("autocmd")
     autocmd BufNewFile *.pl 0r ~/.vim/templates/skeleton.pl
   augroup END
 endif
+
+" Functions
+function! ModSubName() abort
+    let module_name = search('^package ', 'cnw')
+    let prev_sub_line_num = search('^sub ', 'bcnW')
+    return matchstr(getline(module_name), 'package \zs[^; ]\+') . '::' . matchstr(getline(prev_sub_line_num), 'sub \zs\w\+')
+endfunction
