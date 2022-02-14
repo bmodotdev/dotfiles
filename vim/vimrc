@@ -1,13 +1,26 @@
 
-" Spacing
+" Spacing and indentation
 set tabstop=4
 set softtabstop=0
 set shiftwidth=4
 set expandtab
+set autoindent
+set list
+set listchars=tab:!·,trail:·,nbsp:▷
 
 " Style
 syntax on
 set number
+set linebreak
+set cursorline
+autocmd BufRead,BufNewFile *.strace set filetype=strace
+autocmd BufRead,BufNewFile *.cgi set filetype=perl
+autocmd BufRead,BufNewFile *.t set filetype=perl
+autocmd Filetype gitcommit setlocal spell textwidth=72
+call matchadd('ColorColumn', '\%91v', 100)
+
+" No swap file
+set updatecount=0
 
 " Templates by extension
 if has("autocmd")
@@ -16,9 +29,20 @@ if has("autocmd")
   augroup END
 endif
 
+" Aliases
+map <C-h> :bprevious<CR>
+map <C-l> :bnext<CR>
+
 " Functions
 function! ModSubName() abort
     let module_name = search('^package ', 'cnw')
     let prev_sub_line_num = search('^sub ', 'bcnW')
     return matchstr(getline(module_name), 'package \zs[^; ]\+') . '::' . matchstr(getline(prev_sub_line_num), 'sub \zs\w\+')
 endfunction
+
+" Plugins
+
+" NERDtree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+map <C-n> :NERDTreeToggle<CR>
