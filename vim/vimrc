@@ -7,6 +7,7 @@ set tabstop=4
 set softtabstop=0
 set shiftwidth=4
 set expandtab
+set smarttab
 set autoindent
 set list
 set listchars=tab:!·,trail:·,nbsp:▷
@@ -42,8 +43,6 @@ function! ModSubName() abort
     let prev_sub_line_num = search('^sub ', 'bcnW')
     return matchstr(getline(module_name), 'package \zs[^; ]\+') . '::' . matchstr(getline(prev_sub_line_num), 'sub \zs\w\+')
 endfunction
-
-" Plugins
 
 " NERDtree
 autocmd StdinReadPre * let s:std_in=1
