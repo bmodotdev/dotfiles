@@ -5,10 +5,11 @@
 #############
 
 function apt_list () {
-    local pkg="$1"
-    [[ -v pkg ]] || { >&2 printf 'Please provide a package name\n'; exit 1; }
+    local _pkg
+    _pkg="$1"
+    [[ -v _pkg ]] || { >&2 printf 'Please provide a package name\n'; exit 1; }
 
-    local url="$(command apt download "$pkg" --print-uris)"
+    local url="$(command apt download "$_pkg" --print-uris)"
     [[ x"$url" ==  x ]] && return
 
     url="${url%% *}"; url="${url:1}"; url="${url::-1}"
