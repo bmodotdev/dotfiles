@@ -1,3 +1,6 @@
+" Colorscheme
+syntax enable
+colorscheme molokai
 
 " Spacing and indentation
 set tabstop=4

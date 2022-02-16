@@ -7,3 +7,12 @@
 [submodule "vim/pack/bmo/start/spelunker.vim"]
 	path = vim/pack/bmo/start/spelunker.vim
 	url = https://github.com/kamykn/spelunker.vim.git
+[submodule "vim/pack/bmo/start/onedark.vim"]
+	path = vim/pack/bmo/start/onedark.vim
+	url = git@github.com:joshdick/onedark.vim.git
+[submodule "vim/pack/bmo/start/molokai"]
+	path = vim/pack/bmo/start/molokai
+	url = git@github.com:tomasr/molokai.git
+[submodule "vim/pack/bmo/start/perldoc-vim"]
+	path = vim/pack/bmo/start/perldoc-vim
+	url = git@github.com:hotchpotch/perldoc-vim
