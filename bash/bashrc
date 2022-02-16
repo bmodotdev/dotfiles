@@ -45,7 +45,7 @@ function set_alias () {
     # We can ignore files
     local _type
     _type="$(type -t "$1")"
-    if [ -n "$_type" ] && [ "$_type" != 'file' ] ; then
+    if [ -n "$_type" ] && [ x"$_type" != x ] ; then
         >&2 printf 'String “%s” already exists as a %s\n' "$1" "$_type"
     else
         alias "$1"="$2"
