@@ -20,6 +20,17 @@ function backtrace_disable () {
     unset _backtrace
 }
 
+# success "Finished install"
+#   $1  required    The string to log
+#
+function success () {
+    local _date
+
+    _date="$(command -p date "$_date_format")"
+
+    printf "${green}SUCCESS${reset} [%s] %s\n" "$_date" "${1:-Success}"
+}
+
 # debug "Using download mirror: $mirror"
 #   $1  required    The string to log
 #
@@ -31,7 +42,7 @@ function debug () {
     _date="$(command -p date "$_date_format")"
     read -r _line _sub _file < <(caller 0)
 
-    printf 'DEBUG [%s] <%s@%s:%s> %s\n' "$_date" "$_sub" "$_file" "$_line" "${1:-Unknown Error}"
+    printf 'DEBUG   [%s] <%s@%s:%s> %s\n' "$_date" "$_sub" "$_file" "$_line" "${1:-Unknown Error}"
 }
 
 # info "Download completel"
@@ -43,7 +54,7 @@ function info () {
     _date="$(command -p date "$_date_format")"
     read -r _line _sub _file < <(caller 0)
 
-    printf "${blue}INFO${reset}  [%s] <%s@%s:%s> %s\n" "$_date" "$_sub" "$_file" "$_line" "${1:-Unknown Error}"
+    printf "${blue}INFO${reset}    [%s] <%s@%s:%s> %s\n" "$_date" "$_sub" "$_file" "$_line" "${1:-Unknown Error}"
 }
 
 # warn "Outdated version, consider updating"
@@ -55,7 +66,7 @@ function warn () {
     _date="$(command -p date "$_date_format")"
     read -r _line _sub _file < <(caller 0)
 
-    printf "${yellow}WARN${reset}  [%s] <%s@%s:%s> %s\n" "$_date" "$_sub" "$_file" "$_line" "${1:-Unknown Error}"
+    printf "${yellow}WARN${reset}    [%s] <%s@%s:%s> %s\n" "$_date" "$_sub" "$_file" "$_line" "${1:-Unknown Error}"
 }
 
 # error "Cloud not download dependency: $dep"
@@ -67,7 +78,7 @@ function error () {
     _date="$(command -p date "$_date_format")"
     read -r _line _sub _file < <(caller 0)
 
-    >&2 printf "${red}ERROR${reset} [%s] <%s@%s:%s> %s\n" "$_date" "$_sub" "$_file" "$_line" "${1:-Unknown Error}"
+    >&2 printf "${red}ERROR${reset}   [%s] <%s@%s:%s> %s\n" "$_date" "$_sub" "$_file" "$_line" "${1:-Unknown Error}"
     [ "${_backtrace:-FALSE}" == FALSE ] || print_backtrace 1
 }
 
@@ -79,7 +90,7 @@ function die () {
     local _date
 
     _date="$(command -p date "$_date_format")"
-    >&2 printf "${red}${bold}FATAL${reset} [%s] %s\n" "$_date" "${1:-Unknown Error}"
+    >&2 printf "${red}${bold}FATAL${reset}   [%s] %s\n" "$_date" "${1:-Unknown Error}"
 
     print_backtrace 1
 
