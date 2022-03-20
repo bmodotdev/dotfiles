@@ -20,6 +20,7 @@ set cursorline
 autocmd BufRead,BufNewFile *.strace set filetype=strace
 autocmd BufRead,BufNewFile *.cgi set filetype=perl
 autocmd BufRead,BufNewFile *.t set filetype=perl
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd Filetype gitcommit setlocal spell textwidth=72
 call matchadd('ColorColumn', '\%91v', 100)
 
