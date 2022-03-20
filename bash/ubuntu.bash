@@ -1,8 +1,31 @@
 #!/usr/bin/env bash
+###########
+# Aliases #
+###########
 
 #############
 # Functions #
 #############
+
+function a () {
+    case "$1" in
+        l)
+            shift
+            command -p apt list "$@"
+            ;;
+        s)
+            shift
+            command -p apt search "$@"
+            ;;
+        u)
+            shift
+            command -p apt update "$@"
+            ;;
+        *)
+            command -p apt "$@"
+            ;;
+    esac
+}
 
 function apt_list () {
     local _pkg
