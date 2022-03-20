@@ -76,6 +76,37 @@ function ex () {
     fi
 }
 
+function lst () {
+  if [[ "$#" -eq 0 ]]; then
+    local _cwd each full
+    _cwd="$(pwd)"
+    for each in ${_cwd//\// }; do
+      full+="/$each"
+      command -p stat -c '%a %U:%G(%u:%g) %F %n' "$full"
+    done
+    unset full each
+  fi
+
+  local i
+  for i in "$@"; do
+    for each in ${i//\// }; do
+      full+="/$each";
+        command -p stat -c '%a %U:%G(%u:%g) %F %n' "$full";
+        if [[ -f "$full" ]]; then
+            sym="$(readlink -q ${full})"
+            if [[ "${sym:=null}" == null ]]; then
+                command -p lsattr "$full"
+            else
+                command -p lsattr "$sym"
+            fi
+            unset sym
+        fi
+    done
+    printf "\n"
+    unset full each
+  done
+}
+
 #############
 # Variables #
 #############
@@ -83,7 +114,7 @@ _GIT_DIR="${HOME}/git/"
 _DOTFILES_DIR="${_GIT_DIR}dotfiles/"
 _BASH_DIR="${_DOTFILES_DIR}bash/"
 export GIT_DIR DOTFILES_DIR BASH_DIR
-export PATH="${PATH}:${HOME}/.local/bin"
+export PATH="${PATH}:${HOME}/.local/bin:/usr/local/bin"
 
 # Bash History - http://mywiki.wooledge.org/BashFAQ/088
 HISTCONTROL='ignorespace:ignoredupe'
