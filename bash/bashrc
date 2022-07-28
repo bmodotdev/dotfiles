@@ -113,14 +113,14 @@ function lst () {
 _GIT_DIR="${HOME}/git/"
 _DOTFILES_DIR="${_GIT_DIR}dotfiles/"
 _BASH_DIR="${_DOTFILES_DIR}bash/"
-export GIT_DIR DOTFILES_DIR BASH_DIR
+export _GIT_DIR _DOTFILES_DIR _BASH_DIR
 export PATH="${PATH}:${HOME}/.local/bin:/usr/local/bin"
 
 # Bash History - http://mywiki.wooledge.org/BashFAQ/088
 HISTCONTROL='ignorespace:ignoredupe'
 HISTFILESIZE=400000000
 HISTIGNORE='cd:clear:fg:fg[ \t]*:history:history[ \t]*:ll:ls'
-HISTSIZE=2000
+HISTSIZE=10000
 export HISTCONTROL HISTFILESIZE HISTSIZE PROMPT_COMMAND
 chattr +a ~/.bash_history
 set_prompt_command 'history -a'
@@ -131,8 +131,9 @@ export EDITOR="$VISUAL"
 ###########
 # Aliases #
 ###########
-set_alias 'sudo' 'sudo '
-set_alias 'll' 'ls -lah --color'
+set_alias 'sudo'    'sudo '
+set_alias 'll'      'ls -lah --color'
+set_alias 'j'       'jobs'
 
 #########
 # Setup #
