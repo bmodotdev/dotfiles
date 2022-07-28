@@ -10,5 +10,8 @@ export SSH_AGENT_ENV="${HOME}/.ssh/agent.env"
 ssh-add -l >/dev/null 2>&1
 if [ $? -eq 2 ]; then
     ssh-agent -s -t "$SSH_AGENT_KEY_LIFE" > "$SSH_AGENT_ENV"
+    sed -ri 's/(Agent pid)/SSH \1/' "$SSH_AGENT_ENV"
     source "$SSH_AGENT_ENV"
 fi
+
+ssh-add -l
