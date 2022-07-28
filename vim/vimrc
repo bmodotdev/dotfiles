@@ -1,6 +1,9 @@
 " Colorscheme
 syntax enable
-colorscheme molokai
+colorscheme onedark
+
+" Transparent background
+hi Normal guibg=NONE ctermbg=NONE
 
 " Spacing and indentation
 set tabstop=4

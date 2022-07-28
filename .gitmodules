@@ -16,3 +16,6 @@
 [submodule "vim/pack/bmo/start/perldoc-vim"]
 	path = vim/pack/bmo/start/perldoc-vim
 	url = git@github.com:hotchpotch/perldoc-vim
+[submodule "vim/pack/bmo/start/vim-javascript-syntax"]
+	path = vim/pack/bmo/start/vim-javascript-syntax
+	url = git@github.com:jelera/vim-javascript-syntax.git
