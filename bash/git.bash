@@ -25,6 +25,7 @@ function g () {
             ;;
         *)
             command -p git "$@"
+            ;;
     esac
 }
 
