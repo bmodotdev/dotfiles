@@ -6,7 +6,7 @@ source ~/perl5/perlbrew/etc/bashrc
 ###########
 # Aliases #
 ###########
-set_alias p 'perl -Mstrict -MData::Dumper'
+set_alias p 'perl -Mstrict -MData::Dumper -w'
 set_alias pb perlbrew
 set_alias pc perlcritic
 set_alias pd perldoc
@@ -17,7 +17,7 @@ set_alias pt perltidy
 #############
 
 function install_perlbrew () {
-    local bin="${GIT_DIR}App-perlbrew/perlbrew"
+    local bin="${_GIT_DIR}App-perlbrew/perlbrew"
     if [ ! -x "$bin" ]; then
         >&2 printf 'perlbrew missing or not executable: “%s”\n' "$bin"
         return
