@@ -1,9 +1,9 @@
 # Ansi color code variables
 blue="\e[0;94m"
 cyan="\e[1;96m"
-green="\e[0;92m"
+green="\e[0;32m"
 purple="\e[1;95m"
-red="\e[0;91m"
+red="\e[0;31m"
 yellow="\e[1;93m"
 white="\e[0;97m"
 

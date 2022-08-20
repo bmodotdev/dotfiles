@@ -30,27 +30,29 @@ function g () {
 }
 
 function git_branch_prompt () {
-    [[ -e '.git' ]] || return
 
-    local _branch
-    _branch="$(command -p git symbolic-ref -q HEAD)"
+    local _branch _status
+    _branch="$(command -p git symbolic-ref -q HEAD 2>/dev/null)"
+    [[ "${_branch}"x == x ]] && return
+
     _branch="${_branch##refs/heads/}"
     _branch="${_branch:-HEAD}"
+    _status="$(command -p git status 2>/dev/null)"
 
     printf '▶ '
     # Clean
-    if command -p git status 2>/dev/null | command -p grep -q 'nothing to commit'; then
+    if [[ "$_status" =~ 'nothing to commit' ]]; then
         printf '%s' "$_branch"
     # Staged
-    elif command -p git status 2>/dev/null | command -p grep -q 'Changes to be committed'; then
-        printf "${bold}${yellow}%s${reset} " "$_branch"
+    elif [[ "$_status" =~ 'Changes to be committed' ]]; then
+        printf "${bold}${green}%s${reset} " "$_branch"
     # Modified
     else
-        printf "${bold}${cyan}%s${reset} " "$_branch"
+        printf "${red}%s${reset} " "$_branch"
     fi
 }
 
 #########
 # Setup #
 #########
-set_prompt_command 'PS1="\u@\h [ \w $(git_branch_prompt)] \$ "'
+set_prompt_command 'PS1="${blue}\u${reset}@${blue}\h${reset} [ \w $(git_branch_prompt)] \$ "'
