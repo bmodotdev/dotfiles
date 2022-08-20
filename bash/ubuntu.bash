@@ -21,6 +21,10 @@ function a () {
             shift
             command -p apt update "$@"
             ;;
+        uu)
+            shift
+            command -p apt update "$@"
+            ;;
         *)
             command -p apt "$@"
             ;;
