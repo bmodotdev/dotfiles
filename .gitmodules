@@ -7,9 +7,6 @@
 [submodule "vim/pack/bmo/start/spelunker.vim"]
 	path = vim/pack/bmo/start/spelunker.vim
 	url = https://github.com/kamykn/spelunker.vim.git
-[submodule "vim/pack/bmo/start/onedark.vim"]
-	path = vim/pack/bmo/start/onedark.vim
-	url = git@github.com:joshdick/onedark.vim.git
 [submodule "vim/pack/bmo/start/molokai"]
 	path = vim/pack/bmo/start/molokai
 	url = git@github.com:tomasr/molokai.git
@@ -19,3 +16,6 @@
 [submodule "vim/pack/bmo/start/vim-javascript-syntax"]
 	path = vim/pack/bmo/start/vim-javascript-syntax
 	url = git@github.com:jelera/vim-javascript-syntax.git
+[submodule "vim/pack/bmo/start/vim-colorschemes"]
+	path = vim/pack/bmo/start/vim-colorschemes
+	url = git@github.com:EvitanRelta/vim-colorschemes.git

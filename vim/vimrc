@@ -1,6 +1,6 @@
 " Colorscheme
 syntax enable
-colorscheme onedark
+colorscheme jellybeans
 
 " Transparent background
 hi Normal guibg=NONE ctermbg=NONE
