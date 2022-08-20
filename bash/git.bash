@@ -43,14 +43,14 @@ function git_branch_prompt () {
         printf '%s' "$_branch"
     # Staged
     elif command -p git status 2>/dev/null | command -p grep -q 'Changes to be committed'; then
-        printf "${bold}${yellow}%s${reset}" "$_branch"
+        printf "${bold}${yellow}%s${reset} " "$_branch"
     # Modified
     else
-        printf "${bold}${cyan}%s${reset}" "$_branch"
+        printf "${bold}${cyan}%s${reset} " "$_branch"
     fi
 }
 
 #########
 # Setup #
 #########
-set_prompt_command 'PS1="\u@\h [ \w $(git_branch_prompt) ] \$ "'
+set_prompt_command 'PS1="\u@\h [ \w $(git_branch_prompt)] \$ "'
